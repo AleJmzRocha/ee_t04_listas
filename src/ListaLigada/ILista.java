@@ -1,6 +1,10 @@
 package ListaLigada;
 
 public interface ILista<T>{
+	/**
+	 * Creación de la interfaz ILista<T>.
+	 * @author Jiménez Rocha Alejandra
+	 */
 	public void inserta_inicio(T dato);
     
 	public void inserta_final(T dato);

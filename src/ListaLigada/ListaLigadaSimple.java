@@ -1,19 +1,42 @@
 package ListaLigada;
 import javax.swing.JOptionPane;
 
+/**
+ * @author Jiménez Rocha Alejandra
+ * Clase que implementa los métodos de la interface ILista<T>.
+ */
 public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
+	/**
+	 * Creación del nodo que contendrá el dato y la liga.
+	 */
 	private Nodo<T> inicio;
 	
+	/**
+	 * Constructor que incializa la lista en nula.
+	 */
 	public ListaLigadaSimple(){
     	inicio = null;
     }
 	
+	/**
+	 * Método que permite obtener el inicio de la lista.
+	 * @return
+	 */
 	public Nodo<T> getInicio(){
         return inicio;
     }
 	
 	/**
-     * Este método sobrescribe el método toString() de la clase Object
+	 * Método que permite cambiar el inicio de la lista.
+	 * @return
+	 */
+	public void setInicio(Nodo<T> inicio){
+		this.inicio = inicio;
+	}
+	
+	/**
+     * Este método sobrescribe el método toString() de la clase Object.
+     * Imprime la lista con las datos de ésta misma.
      */
     @Override
     public String toString(){
@@ -26,7 +49,12 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
          s += null;
          return s;
     }
-    
+        
+    /**
+     *Implementación del método inserta_inicio(T dato) de la interface ILista<T>.
+     *Permite agregar un elemento al inicio de la lista.
+     *@param dato
+     */
     @Override
 	public void inserta_inicio(T dato){
         Nodo<T> nuevo = new Nodo<T>(dato);
@@ -34,6 +62,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
         inicio = nuevo;
     }
 	
+    /**
+     *Implementación del método inserta_final(T dato) de la interface ILista<T>.
+     *Permite agregar un elemento al final de la lista.
+     *@param dato
+     */
     @Override
 	public void inserta_final(T dato){
         Nodo<T> temporal = inicio;
@@ -46,6 +79,10 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
         }        
     }
 	
+    /**
+     *Implementación del método recorreIterativo() de la interface ILista<T>.
+     *Método que permite recorrer la lista de inicio a fin.
+     */
     @Override
 	public String recorreIterativo(){
     	Nodo<T> temporal = inicio;
@@ -58,6 +95,12 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
 		return s;
     }
 	
+    /**
+     *Implementación del método recorreRecursivo(INodo<T> p) de la interface ILista<T>.
+     *Método que permite recorrer la lista recursivamente, es decir, 
+     *llamándose el mismo método dentro de éste mismo pero con el nodo siguiente.
+     *@param dato
+     */
     @Override
 	public String recorreRecursivo(INodo<T> p){
 		String s = "";
@@ -70,6 +113,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
     	return s;
     }
 	
+    /**
+     *Implementación del método inserta_antes_de(T dato, T referencia) de la interface ILista<T>.
+     *Método que permite agregar un elemento antes de otro que se desee.
+     *@param dato, referencia
+     */
     @Override
 	public void inserta_antes_de(T dato, T referencia){
         Nodo<T> temporal = inicio, nodoEncontrado = null, nuevo;
@@ -91,6 +139,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
             }              
     }
 	
+    /**
+     *Implementación del método inserta_despues_de(T dato, T referencia) de la interface ILista<T>.
+     *Método que permite agregar un elemento después de otro que se desee.
+     *@param dato, referencia
+     */
     @Override
 	public void inserta_despues_de(T dato, T referencia){
         Nodo<T> temporal = inicio, nuevo;
@@ -111,6 +164,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
            }
     }
 	
+    /**
+     *Implementación del método inserta_ordenado(T dato) de la interface ILista<T>.
+     *Método que, al insertar elementos, permite que éstos se agreguen de manera descendente.
+     *@param dato
+     */
     @Override
 	public void inserta_ordenado(T dato){
         Nodo<T> temporal = inicio, nodoEncontrado = null, nuevo;
@@ -139,6 +197,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
         }
     }
 	
+    /**
+     *Implementación del método elimina_primero() de la interface ILista<T>.
+     *Método que elimina el primer elemento de la lista.
+     *@return dato
+     */
     @Override
 	public T elimina_primero(){
 		T dato = null;
@@ -151,6 +214,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
 		return dato;
 	}
 	
+    /**
+     *Implementación del método elimina_ultimo() de la interface ILista<T>.
+     *Método que elimina el último elemento de la lista.
+     *@return dato
+     */
     @Override
 	public T elimina_ultimo(){
         Nodo<T> temporal = inicio, anterior = null;
@@ -167,11 +235,16 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
                     anterior.setSiguiente(null);
             }     
         }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null,"Lista vacía");
+            JOptionPane.showMessageDialog(null,"Lista vacía.");
         }
 		return dato;
     }
 	
+    /**
+     *Implementación del método elimina_elemento(T dato) de la interface ILista<T>.
+     *Método que permite la eliminación del elemento que se desee.
+     *@param dato
+     */
     @Override
 	public T elimina_elemento(T dato){
 		Nodo<T> aux = inicio, temp = null;
@@ -191,13 +264,18 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
 				else
 					temp.setSiguiente(aux.getSiguiente());
 			}else
-					JOptionPane.showMessageDialog(null, "El elemento no se encuentra en la lista");
+					JOptionPane.showMessageDialog(null, "El elemento no se encuentra en la lista.");
 		}catch(NullPointerException e){
             JOptionPane.showMessageDialog(null,"Lista vacía");
         }
 		return aux.getDato();
 	}
 	
+    /**
+     *Implementación del método elimina_antes(T dato) de la interface ILista<T>.
+     *Método que permite la eliminación del elemento está antes del referenciado. 
+     *@param dato
+     */
     @Override
 	public T elimina_antes(T dato){
 		Nodo<T> temp = inicio, aux = inicio, aux2 = null;
@@ -229,6 +307,11 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
 		return aux.getDato();
 	}
 	
+    /**
+     *Implementación del método busca_desordenado(T dato) de la interface ILista<T>.
+     *Método que permite la búsqueda de un elemento en una lista que no está ordenada.
+     *@param dato
+     */
     @Override
 	public T busca_desordenado(T dato){
 		Nodo<T> aux = inicio;
@@ -240,12 +323,16 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
 		
 		if(aux == null)
 //			JOptionPane.showMessageDialog(null, "El elemento NO se encuentra en la lista");
-			return d;
-		return null;
+			return null;
+		return d;
 //		else
 //			JOptionPane.showMessageDialog(null, "El elemento SÍ se encuentra en la lista");
 	}
 	
+    /**
+     *Método que permite la búsqueda de un elemento en una lista que se ordenó previamente.
+     *@param dato
+     */
 	public void busquedaOrdenada(T dato){
 		Nodo<T> aux = inicio;
 		while(aux != null && (aux.getDato().compareTo(dato)<0))
@@ -257,34 +344,62 @@ public class ListaLigadaSimple<T extends Comparable<T>> implements ILista<T>{
 			JOptionPane.showMessageDialog(null, "El elemento SÍ se encuentra en la lista");
 	}
 	
+	/**
+     *Implementación del método busca_rescursivo(INodo<T> nodito, T dato) de la interface ILista<T>.
+     *Método que permite la búsqueda de un elemento en una lista de forma recursiva.
+     *@param dato
+     */
     @Override
 	public T busca_rescursivo(INodo<T> nodito, T dato){
 		Nodo<T> nuevo = (Nodo<T>) nodito;
 		if(nuevo == null)
 			if(nuevo.getDato().compareTo(dato) == 0)
-				JOptionPane.showMessageDialog(null, "El elemento se encuentra en la lista");
+				JOptionPane.showMessageDialog(null, "El elemento se encuentra en la lista.");
 			else
 				busca_rescursivo(nuevo.getSiguiente(),nuevo.getSiguiente().getDato());
 		else
-			JOptionPane.showMessageDialog(null,"El elemento NO se encuentra en la lista");
+			JOptionPane.showMessageDialog(null,"El elemento NO se encuentra en la lista.");
 		return nuevo.getDato();
 	}
 	
+    /**
+     *Implementación del método obtenDatoEnPosicion(Integer posicion) de la interface ILista<T>.
+     *Método que permite obtener el dato en la posición deseada de la lista.
+     *@param posicion
+     */
     @Override
 	public T obtenDatoEnPosicion(Integer posicion) {
-		return null;
+    	Integer cont = 0;
+    	T dato = null;
+    	Nodo<T> aux = inicio;
+    	try{
+    		while(aux != null){
+    			if(cont == posicion)
+    				dato = aux.getDato();
+    			else{
+    				aux = aux.getSiguiente();
+    				cont++;
+    			}
+    		}
+    	}catch(NullPointerException npe){
+    		JOptionPane.showMessageDialog(null, "Lista vacía.");
+    	}
+		return dato;
 	}
 	
+    /**
+     * Prueba de la clase.
+     * @param args
+     */
 	public static void main(String[] args) {
 		ListaLigadaSimple<Integer> list = new ListaLigadaSimple<Integer>();
+		list.inserta_inicio(42);
+		list.inserta_inicio(22);
 		list.inserta_final(1);
 		list.inserta_final(2);
-		list.inserta_final(3);
-		list.inserta_final(4);
-		list.inserta_final(5);
+		list.inserta_antes_de(43, 1);
+		list.inserta_ordenado(23);
+		list.inserta_ordenado(36);
 		System.out.println(list);
-		//list.recorreRecursivo(list.getInicio().getDato());
-		//list.busquedaRecursiva(4);
-		//System.out.println(list);
 	}	
 }
